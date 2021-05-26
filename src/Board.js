@@ -65,28 +65,44 @@ function Board({ nrows=3, ncols=3, chanceLightStartsOn=0.30 }) {
       };
 
       // TODO: Make a (deep) copy of the oldBoard
-
+      const boardCopy = oldBoard.map(row => [...row]);
+      
       // TODO: in the copy, flip this cell and the cells around it
+      flipCell(y,x,boardCopy);
+      flipCell(y, x+1, boardCopy);
+      flipCell(y, x-1, boardCopy);
+      flipCell(y+1, x, boardCopy);
+      flipCell(y-1, x, boardCopy);
 
       // TODO: return the copy
+        return boardCopy;
     });
   }
 
   // if the game is won, just show a winning msg & render nothing else
 
+  function showWinner(){
+    if(hasWon()){
+    return (
+      <div> You won! </div>
+    )
+    }
+  }
+
+
   // TODO
 
   // make table board
   function generateBoardHTML() {
-    //use the board boolean array
-    <Cell />
+    return <Cell 
+    >
   }
 
   // TODO
 
   return (
     <div className="Board">
-      {generateBoardOrWinMsg()}
+      {showWinner() || generateBoardHTML()}
     </div>
   )
 }
